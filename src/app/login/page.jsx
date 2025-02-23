@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const [user, setUser] = useState({
     email: "",
@@ -17,15 +17,15 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post("/api/login", user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         withCredentials: true,
       });
 
       if (res.data.success) {
         toast.success(res.data.message);
-        router.push("/home"); 
+        router.push("/home");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");

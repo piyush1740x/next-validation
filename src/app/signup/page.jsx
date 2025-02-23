@@ -17,11 +17,12 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res = await axios.post("/api/signup", user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         withCredentials: true,
-      }); 
+        withCredentials: true,
+      });
       if (res.data.success) {
         toast.success(res.data.message);
         router.push("/home");
